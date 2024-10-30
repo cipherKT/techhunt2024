@@ -5,7 +5,7 @@ import {useEffect} from "react";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
 
-export default async function Home() {
+export default function Home() {
     useEffect(() => {
         const setTokenAsync = async () => {
             await setToken();
