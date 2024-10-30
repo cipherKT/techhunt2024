@@ -14,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Not What It Looks | CTF",
-  description: "Huh! Go ahead, give it a try...",
+  title: "A Masked Truth | Tech Hunt 2024",
+  description: "Expect disappointment, you won't be disappointed...!",
 };
 
 export default function RootLayout({
