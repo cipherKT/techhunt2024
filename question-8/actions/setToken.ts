@@ -22,5 +22,7 @@ export async function setToken() {
 
     const token = await signJWT(payload);
 
-    cookies().set("token", token)
+    cookies().set("token", token, {
+        httpOnly: true
+    })
 }
