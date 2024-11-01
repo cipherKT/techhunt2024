@@ -2,7 +2,7 @@ import {NextResponse} from "next/server";
 
 export async function GET() {
     try {
-        let smth = await fetch('https://api.uploadthing.com/v6/listFiles', {
+        const smth = await fetch('https://api.uploadthing.com/v6/listFiles', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ export async function GET() {
 
         const resp = await smth.json()
         console.log(resp.files[0].key)
-        let smth1 = await fetch('https://api.uploadthing.com/v6/requestFileAccess', {
+        const smth1 = await fetch('https://api.uploadthing.com/v6/requestFileAccess', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
