@@ -27,6 +27,7 @@ export async function GET() {
         const resp1 = await smth1.json()
         return NextResponse.redirect(resp1.url)
     } catch (e) {
+        console.error("Sometimes you just can't win against this stupid fuckin framework: ", e)
         return NextResponse.json({error: "Contact Event Organizers"}, {status: 500})
     }
 }
