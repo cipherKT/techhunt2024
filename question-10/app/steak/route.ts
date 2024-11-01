@@ -1,12 +1,6 @@
-import express, {Request, Response} from "express";
-import * as process from "node:process";
-import dotenv from "dotenv";
+import {NextResponse} from "next/server";
 
-const app = express();
-dotenv.config();
-const port = process.env.PORT || 3001;
-
-app.get("/steakfishersAwesomeImJustSayingThisIsntAHintJustALongURL3210987654", async (req: Request, res: Response) => {
+export async function GET() {
     try {
         let smth = await fetch('https://api.uploadthing.com/v6/listFiles', {
             method: 'POST',
@@ -31,14 +25,8 @@ app.get("/steakfishersAwesomeImJustSayingThisIsntAHintJustALongURL3210987654", a
         })
 
         const resp1 = await smth1.json()
-        res.redirect(resp1.url);
+        return NextResponse.redirect(resp1.url)
     } catch (e) {
-        res.send({
-            error: "Report to event organizers!"
-        })
+        return NextResponse.json({error: "Contact Event Organizers"}, {status: 500})
     }
-});
-
-app.listen(port, () => {
-    console.log(`[server]: Server is running at http://localhost:${port}`);
-});
+}
