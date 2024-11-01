@@ -1,5 +1,7 @@
 import {NextResponse} from "next/server";
 
+export const revalidate = 0;
+
 export async function GET() {
     try {
         const smth = await fetch('https://api.uploadthing.com/v6/listFiles', {
