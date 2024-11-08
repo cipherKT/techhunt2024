@@ -1,10 +1,34 @@
 import numpy as np
 from scipy.io.wavfile import write
 
-sample_rate = 44100
-duration = 5
+sample_rate:int = 44100
+duration = 100
 amplitude = 0.5
-morse_code = ".- -... -.-."
+message:str = "XHGBNJIKLPRVUMYS4ZDQTCWAEHO5PK2LVRYMFDJ6NSQOLB8IG1ZC3TXEWYK9MHOD7AFPUJ" # Zip Password
+
+MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
+                    'C':'-.-.', 'D':'-..', 'E':'.',
+                    'F':'..-.', 'G':'--.', 'H':'....',
+                    'I':'..', 'J':'.---', 'K':'-.-',
+                    'L':'.-..', 'M':'--', 'N':'-.',
+                    'O':'---', 'P':'.--.', 'Q':'--.-',
+                    'R':'.-.', 'S':'...', 'T':'-',
+                    'U':'..-', 'V':'...-', 'W':'.--',
+                    'X':'-..-', 'Y':'-.--', 'Z':'--..',
+                    '1':'.----', '2':'..---', '3':'...--',
+                    '4':'....-', '5':'.....', '6':'-....',
+                    '7':'--...', '8':'---..', '9':'----.',
+                    '0':'-----', ', ':'--..--', '.':'.-.-.-',
+                    '?':'..--..', '/':'-..-.', '-':'-....-',
+                    '(':'-.--.', ')':'-.--.-'}
+
+# morse_code = ".- -... -.-."
+morse_code = ""
+
+for i in message.strip().replace(" ", ""):
+    morse_code += MORSE_CODE_DICT[i] + " "
+
+print(f"Message: {message}\nMorse Code: {morse_code}")
 
 noise_base = np.random.uniform(-amplitude, amplitude, int(duration * sample_rate))
 
