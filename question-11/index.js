@@ -3,7 +3,7 @@ const fs = require('fs');
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 3000;
+const port = 443;
 
 // Serve static files from 'public' directory
 // app.use(express.static('public'));
@@ -21,6 +21,6 @@ const options = {
 };
 
 // Create an HTTPS server
-https.createServer(options, app).listen(3000, () => {
-    console.log('Secure server running on https://localhost:3000');
+https.createServer(options, app).listen(443, '0.0.0.0', () => {
+    console.log('Secure server running on https://<public-ip>:443');
 });
