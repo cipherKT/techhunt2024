@@ -1,0 +1,10 @@
+websiteAutomations/certsAutomation/certs
+websiteAutomations/certsAutomation/qrs
+websiteAutomations/certsAutomation/venv
+websiteAutomations/qrGeneration/output/*
+/websiteAutomations/certsAutomation/env.json
+/websiteAutomations/accountCreations/env.json
+/websiteAutomations/accountCreations/input.csv
+/websiteAutomations/accountCreations/output.csv
+/websiteAutomations/certsAutomation/standings.json
+/websiteAutomations/qrGeneration/standings.json
