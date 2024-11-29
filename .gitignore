@@ -1,0 +1,5 @@
+websiteAutomations/certsAutomtion/certs
+websiteAutomations/certsAutomtion/qrs
+websiteAutomations/certsAutomtion/venv
+websiteAutomations/qrGeneration/output/*
+/websiteAutomations/certsAutomtion/env.json
