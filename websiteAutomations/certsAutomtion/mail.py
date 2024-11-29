@@ -6,7 +6,6 @@ from string import Template
 from email.mime.application import MIMEApplication
 import os
 import json
-
 with open('env.json') as file:
     env = json.load(file)
 
