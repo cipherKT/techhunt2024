@@ -6,7 +6,8 @@ from string import Template
 from email.mime.application import MIMEApplication
 import os
 import json
-with open('env.json') as file:
+
+with open('./env.json') as file:
     env = json.load(file)
 
 # Email configuration
@@ -53,7 +54,7 @@ def send_email(recipient_email, team_id, name, is_winner):
     try:
         folder = "losers" if not is_winner else "winners"
         pdf_path = f"./certs/{folder}/pdfs/{team_id}_{name}.pdf"
-        
+
         # Create message
         msg = MIMEMultipart('mixed')
         msg['Subject'] = "Your TechHunt E-Certificate"
@@ -67,16 +68,26 @@ def send_email(recipient_email, team_id, name, is_winner):
 
         # Attach HTML content
         msg.attach(MIMEText(html_content, 'html'))
-        
+
+        # Improved PDF attachment logic
         if os.path.exists(pdf_path):
-            with open(pdf_path, 'rb') as pdf_file:
-                pdf_attachment = MIMEApplication(pdf_file.read(), _subtype="pdf")
-                pdf_attachment.add_header(
-                    'Content-Disposition',
-                    'attachment',
-                    filename=os.path.basename(pdf_path)  # File name for the recipient
-                )
-                msg.attach(pdf_attachment)
+            print(f"Attempting to attach PDF: {pdf_path}")
+            print(f"PDF exists: {os.path.exists(pdf_path)}")
+            print(f"PDF file size: {os.path.getsize(pdf_path)} bytes")
+
+            try:
+                with open(pdf_path, 'rb') as pdf_file:
+                    pdf_attachment = MIMEApplication(pdf_file.read(), _subtype="pdf")
+                    pdf_attachment.add_header(
+                        'Content-Disposition',
+                        'attachment',
+                        filename=f"{team_id}_{name}_certificate.pdf"
+                    )
+                    msg.attach(pdf_attachment)
+                    time.sleep(20)
+                print(f"✅ PDF attached for {recipient_email}")
+            except Exception as e:
+                print(f"❌ Failed to attach PDF for {recipient_email}: {str(e)}")
 
         # Send email
         with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
@@ -101,7 +112,7 @@ def process_json(filename):
                 name = user['name']
                 standing = user['standing']
                 try:
-                    time.sleep(60)
+                    time.sleep(3)
                     send_email(email, team_id, name, True if standing <= 10 else False)
                     sent_count += 1
                     # Add a small delay between emails to avoid rate limiting
